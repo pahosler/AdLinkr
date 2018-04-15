@@ -1,0 +1,26 @@
+{
+  "name": "adlinkr",
+  "version": "0.1.0",
+  "description": "A URL Shortener / URL Managgement Tool for Marketing Campaigns",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./tests/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jodylecompte/Adlinkr.git"
+  },
+  "author": "Jody LeCompte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jodylecompte/Adlinkr/issues"
+  },
+  "homepage": "https://github.com/jodylecompte/Adlinkr#readme",
+  "devDependencies": {
+    "mocha": "^5.1.0",
+    "supertest": "^3.0.0"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
