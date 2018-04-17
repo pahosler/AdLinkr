@@ -1,7 +1,7 @@
 const User = require('../../app/models/User');
 var expect = require('chai').expect;
 
-describe('User Model', function() {
+describe('Models: User', function() {
     it('should be invalid if any required fields are empty', () => {
         const user = new User();
 

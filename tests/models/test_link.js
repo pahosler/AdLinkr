@@ -1,7 +1,7 @@
 const Link = require('../../app/models/Link');
 var expect = require('chai').expect;
 
-describe('Links Model', function() {
+describe('Models:  Link', function() {
     it('should be invalid if URL is empty', () => {
         var link = new Link();
 
