@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
- 
+
 const userSchema = new mongoose.Schema({
     firstName: { 
         type: String,
@@ -33,4 +33,10 @@ const userSchema = new mongoose.Schema({
     activationCode: { type: Number }
 });
  
+userSchema.statics.checkUnique = function(email, callback) {
+    this.model('User').find({email}).then(data => {
+        callback(data.length === 0)
+    });
+}
+
 module.exports = mongoose.model('User', userSchema);

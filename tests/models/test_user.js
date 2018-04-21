@@ -1,5 +1,11 @@
 const User = require('../../app/models/User');
 var expect = require('chai').expect;
+const sinon = require('sinon');
+const mongoose = require('mongoose');
+
+const seed = require('../seeds/user.seed')
+const config = require('../../app/config/config')
+require('../../app/db')
 
 describe('Models: User', function() {
     it('should be invalid if any required fields are empty', () => {
@@ -45,5 +51,26 @@ describe('Models: User', function() {
         });
     });
 
+    describe('Methods: ', () => {
+        beforeEach(function(done) {
+            User.remove({}).then(() => {
+                return User.insertMany(seed);
+              }).then(() => done());
+        })
+        
+        it("checkUnique should return false if duplicate user is found", function(done) {
+            User.checkUnique("test@test.com", function(data) {
+                console.log("data: " + data)
+                expect(data).to.equal(false);
+                done();
+            });
+        });
 
+        it("checkUnique should return false if duplicate user is true", function(done) {
+            User.checkUnique("teswft@test.com", function(data) {
+                expect(data).to.equal(true);
+                done();
+            });
+        });
+    })
 });

@@ -6,12 +6,12 @@ const coreRoutes = require('./routes/core');
 const apiRoutes = require('./routes/api');
 const adminRoutes = require('./routes/admin')
 
-const Link = require('./models/Link')
+const User = require('./models/User');
+
+require('./db')
 
 const app = module.exports = express();
 const port = process.env.PORT || 3000; 
-
-mongoose.connect(config.dbEndPoint);
 
 app.use('/public', express.static('public'));
 
