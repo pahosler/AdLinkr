@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
     firstName: { 
@@ -34,8 +35,26 @@ const userSchema = new mongoose.Schema({
 });
  
 userSchema.statics.checkUnique = function(email, callback) {
-    this.model('User').find({email}).then(data => {
+    this.find({email}).then(data => {
         callback(data.length === 0)
+    });
+}
+
+userSchema.statics.createUser = function(userData, callback) {
+    this.checkUnique(userData.email, data => {
+        if(!data) {
+            return callback("Email already exists", null);
+        }
+        
+        const newUser = new this(userData);
+
+        bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(userData.password, salt, function(err, hash) {
+                newUser.password = hash;
+                newUser.save().then((err, data) => callback(err, data));
+            });
+        });
+
     });
 }
 
