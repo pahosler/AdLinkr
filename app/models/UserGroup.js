@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
- 
+
 const userGroupSchema = new mongoose.Schema({
-    name: { 
+    name: {
         type: String,
-        required: true 
+        required: true,
     },
 
 });
- 
+
 module.exports = mongoose.model('UserGroup', userGroupSchema);

@@ -1,0 +1,10 @@
+{
+  "env": {
+    "es6": true,
+    "mongo": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "google"
+  ]
+}

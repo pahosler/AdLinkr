@@ -1,14 +1,12 @@
 const User = require('../../app/models/UserGroup');
-var expect = require('chai').expect;
+let expect = require('chai').expect;
 
 describe('Models: UserGroup', function() {
-   
     it('should be invalid if name is empty', () => {
         const user = new User();
 
-        user.validate(err => {
+        user.validate((err) => {
             expect(err.errors.name).to.exist;
         });
     });
-
 });
