@@ -11,8 +11,18 @@
 const express = require('express');
 const router = new express.Router();
 
-router.get('/', (req, res) => {
-    res.sendStatus(200);
+const Link = require('../models/Link');
+
+router.get('/:shortCode', (req, res) => {
+    const shortCode = req.params.shortCode;
+
+    Link.find({shortCode}).then((data) => {
+        if (data.length > 0) {
+            res.redirect(data.url);
+        } else {
+            res.sendStatus(404);
+        }
+    });
 });
 
 

@@ -9,12 +9,25 @@
  */
 
 const request = require('supertest');
+
 const app = require('../../app/server');
+const Link = require('../../app/models/Link');
+const seed = require('../seeds/link.seed');
 
 describe('Routes: Core', () => {
     it('Should return an error on invalid route', (done) => {
         request(app)
-            .get('/egaega')
+            .get('/fw')
             .expect(404, done);
+    });
+
+    it('Should redirect on a valid URL', (done) => {
+        Link.remove({}).then(() => {
+            Link.insertMany(seed, (err, data) => {
+                request(app)
+                .get('/goodCode')
+                .expect(302, done);
+            });
+        });
     });
 });

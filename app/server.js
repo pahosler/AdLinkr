@@ -25,12 +25,8 @@ const port = process.env.PORT || 3000;
 
 app.use('/public', express.static('public'));
 
-app.use('/', coreRoutes);
 app.use('/api', apiRoutes);
 app.use('/admin', adminRoutes);
-
-app.use(function(req, res) {
-    res.sendStatus(404);
-});
+app.use('/', coreRoutes);
 
 app.listen(port, () => console.log(`AdLinkr server initalized.`));

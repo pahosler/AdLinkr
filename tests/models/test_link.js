@@ -24,7 +24,7 @@ describe('Models:  Link', function() {
         let link = new Link({url: 'https://google.com'});
 
         link.validate((err) => {
-            expect(err.errors.shortcode).to.exist;
+            expect(err.errors.shortCode).to.exist;
         });
     });
 

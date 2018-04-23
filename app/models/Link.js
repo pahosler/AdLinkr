@@ -15,7 +15,7 @@ const linkSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    shortcode: {
+    shortCode: {
         type: String,
         required: true,
     },
