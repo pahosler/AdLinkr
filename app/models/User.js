@@ -58,13 +58,11 @@ userSchema.statics.createUser = function(userData, callback) {
         }
 
         const newUser = new this(userData);
-
-        bcrypt.genSalt(10, function(err, salt) {
-            bcrypt.hash(userData.password, salt, function(err, hash) {
-                newUser.password = hash;
-                newUser.save().then((err, data) => callback(err, data));
-            });
-        });
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(newUser.password, salt);
+        
+        newUser.password = hash;
+        newUser.save().then((err, data) => callback(err, data));
     });
 };
 
