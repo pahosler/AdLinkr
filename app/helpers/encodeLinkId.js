@@ -9,6 +9,7 @@
  */
 
 const encodeLinkId = (i) => {
+    // console.log("I just got hadned " + i);
     if (typeof i !== 'number') {
         throw new Error('Input must be a number');
     }

@@ -10,7 +10,14 @@
 
 const mongoose = require('mongoose');
 
+const Counter = require('../models/Counter');
+const encodeLinkId = require('../helpers/encodeLinkId');
+
 const linkSchema = new mongoose.Schema({
+    _id: {
+        type: Number,
+        required: true,
+    },
     url: {
         type: String,
         required: true,
@@ -24,5 +31,26 @@ const linkSchema = new mongoose.Schema({
     utmTerm: {type: String},
     utmContent: {type: String},
 });
+
+linkSchema.statics.checkUniqueCode = function(code, callback) {
+    this.find({shortCode: code}).then((data) => {
+        callback(data.length === 0);
+    });
+};
+
+linkSchema.statics.createLink = function(linkData, callback) {
+    this.checkUniqueCode(linkData.shortCode, (data) => {
+        if (!data) {
+            return callback('ShortCode already exists', null);
+        }
+
+        Counter.nextId('link', (id) => {
+            const newLink = new this(linkData);
+            newLink._id = id;
+            newLink.shortCode = encodeLinkId(id),
+            newLink.save(callback);
+        });
+    });
+};
 
 module.exports = mongoose.model('Link', linkSchema);
