@@ -12,11 +12,13 @@ const Campaign = require('../../app/models/Campaign');
 let expect = require('chai').expect;
 
 describe('Models: Campaigns', function() {
-    it('should be invalid if name is empty', () => {
+    it('should be invalid if required fields are empty', () => {
         let campaign = new Campaign();
 
         campaign.validate((err) => {
             expect(err.errors.name).to.exist;
+            expect(err.errors.createdTimestamp).to.exist;
+            expect(err.errors.lastModifiedTimestamp).to.exist;
         });
     });
 });

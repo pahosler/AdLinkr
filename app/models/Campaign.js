@@ -15,6 +15,14 @@ const campaignSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    createdTimestamp: {
+        type: Number,
+        required: true,
+    },
+    lastModifiedTimestamp: {
+        type: Number,
+        required: true,
+    },
 });
 
 module.exports = mongoose.model('Campaign', campaignSchema);

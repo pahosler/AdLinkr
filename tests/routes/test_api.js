@@ -9,6 +9,7 @@
  */
 
 const request = require('supertest');
+const expect = require('chai').expect;
 const app = require('../../app/server');
 
 describe('Routes: API', () => {
@@ -26,5 +27,17 @@ describe('Routes: API', () => {
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect({'error': 'Invalid endpoint.'}, done);
+    });
+
+    describe.only('POST Campaigns/Add', () => {
+        it('Should add a new campaign with valid input', (done) => {
+            request(app)
+                .post('/api/Campaigns/Add')
+                .send({campaignName: 'Test'})
+                .expect((res) => {
+                    console.log(res.body);
+                })
+                .end(done);
+        });
     });
 });
