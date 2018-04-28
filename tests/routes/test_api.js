@@ -29,7 +29,7 @@ describe('Routes: API', () => {
             .expect({'error': 'Invalid endpoint.'}, done);
     });
 
-    describe.only('POST Campaigns/Add', () => {
+    describe.skip('POST Campaigns/Add', () => {
         it('Should add a new campaign with valid input', (done) => {
             request(app)
                 .post('/api/Campaigns/Add')
