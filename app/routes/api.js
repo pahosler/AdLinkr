@@ -30,15 +30,17 @@ router.post('/Campaigns/add', (req, res) => {
     const newCampaign = new Campaign(newCampaignData);
     newCampaign.save((err, data) => {
         if (err) {
-            return res.json({'error': err});
+            res.json({'error': err});
+            return;
         }
 
-        return res.json(data);
+        res.json(data);
+        return;
     });
 
-    res.json({
-        'error': 'Unknown Error Occured: Please contact technical support.',
-    });
+    // res.json({
+    //     'error': 'Unknown Error Occured: Please contact technical support.',
+    // });
 });
 
 router.get('/*', (req, res) => {

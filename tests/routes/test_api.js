@@ -29,13 +29,15 @@ describe('Routes: API', () => {
             .expect({'error': 'Invalid endpoint.'}, done);
     });
 
-    describe.skip('POST Campaigns/Add', () => {
-        it('Should add a new campaign with valid input', (done) => {
+    describe('POST Campaigns/Add', () => {
+        it.only('Should add a new campaign with valid input', (done) => {
             request(app)
                 .post('/api/Campaigns/Add')
                 .send({campaignName: 'Test'})
                 .expect((res) => {
-                    console.log(res.body);
+                    expect(res.body.name).to.equal('Test');
+                    expect(res.body.createdTimestamp)
+                        .to.equal(res.body.lastModifiedTimestamp);
                 })
                 .end(done);
         });
